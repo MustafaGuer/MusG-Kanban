@@ -1,23 +1,47 @@
-<mat-card class="card">
+<div class="dialog-container">
 
-    <mat-card-header>
-        <mat-card-title>Add Task</mat-card-title>
-    </mat-card-header>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
-    <mat-card-content>
+    <h1 mat-dialog-title>Add Task</h1>
+    <div mat-dialog-content>
 
-        <mat-form-field appearance="legacy">
-            <mat-label>Add your next best Idea</mat-label>
-            <input matInput placeholder="Idea...">
-            <mat-icon matSuffix>lightbulb</mat-icon>
-            <!-- <mat-hint>Hint</mat-hint> -->
-        </mat-form-field>
+        <div>
+            <mat-form-field appearance="outline" class="mr-16">
+                <mat-label>Title...</mat-label>
+                <input [disabled]="loading" [(ngModel)]="task.title" matInput>
+            </mat-form-field>
 
-    </mat-card-content>
+            <mat-form-field appearance="outline">
+                <mat-label>Urgency</mat-label>
+                <mat-select [disabled]="loading" [(ngModel)]="task.urgency">
+                    <mat-option class="high" value="high">High</mat-option>
+                    <mat-option class="medium" value="medium">Medium</mat-option>
+                    <mat-option class="low" value="low">Low</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-    <mat-card-actions>
-        <button mat-button (click)="onNoClick()">Close</button>
-        <button mat-button cdkFocusInitial>Save</button>
-    </mat-card-actions>
+        <div>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Textarea</mat-label>
+                <textarea [disabled]="loading" [(ngModel)]="task.description" matInput rows="5"></textarea>
+            </mat-form-field>
+        </div>
 
-</mat-card>
+        <div>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Choose a date</mat-label>
+                <input [disabled]="loading" [value]="date.value" disabled matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div mat-dialog-actions class="flex-end">
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="saveTask()" [mat-dialog-close]="" cdkFocusInitial>Save</button>
+    </div>
+
+</div>

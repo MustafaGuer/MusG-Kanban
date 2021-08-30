@@ -25,6 +25,8 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "skipLibCheck": true // temp solution for: Error: node_modules/@firebase/app-compat/dist/src/firebaseApp.d.ts:19:10 - error TS2305: Module '"@firebase/app"' has no exported member '_FirebaseAppInternal'. 
+                        // 19 import { _FirebaseAppInternal as _FirebaseAppExp } from '@firebase/app';
   }
 }

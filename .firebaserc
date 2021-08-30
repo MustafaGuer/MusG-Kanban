@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "musg-kanban": {
+      "hosting": {
+        "MusG-Kanban": [
+          "musg-kanban"
+        ]
+      }
+    }
+  }
+}

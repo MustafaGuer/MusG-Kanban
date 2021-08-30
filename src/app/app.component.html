@@ -1,12 +1,14 @@
 <mat-drawer-container class="container" autosize>
-    
+
     <mat-drawer #drawer class="sidenav" mode="side">
         <div class="logo-container">
-            PLATZ FÜR LOGO
+            <img src="../assets/img/logo.png">
         </div>
 
         <ul class="side-menu">
-            <li><mat-icon>dashboard</mat-icon>Kanban</li>
+            <li>
+                <mat-icon>dashboard</mat-icon>Kanban
+            </li>
         </ul>
     </mat-drawer>
 
@@ -16,9 +18,9 @@
         </button>
         <span>MusG's-Kanban</span>
     </mat-toolbar>
-    
+
     <div class="router-container">
         <router-outlet></router-outlet>
     </div>
-  
-  </mat-drawer-container>
+
+</mat-drawer-container>
