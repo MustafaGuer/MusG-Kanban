@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
@@ -56,7 +57,8 @@ import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

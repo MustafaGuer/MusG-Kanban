@@ -40,8 +40,8 @@
     </div>
 
     <div mat-dialog-actions class="flex-end">
-        <button mat-button (click)="onNoClick()">Cancel</button>
-        <button mat-button (click)="saveTask()" [mat-dialog-close]="" cdkFocusInitial>Save</button>
+        <button [disabled]="loading" mat-button (click)="onNoClick()">Cancel</button>
+        <button [disabled]="loading" mat-button (click)="saveTask()" [mat-dialog-close]="" cdkFocusInitial>Save</button>
     </div>
 
 </div>

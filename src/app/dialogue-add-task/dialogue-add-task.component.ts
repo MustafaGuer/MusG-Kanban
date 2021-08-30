@@ -12,7 +12,7 @@ import { Task } from 'src/models/task.class';
 export class DialogueAddTaskComponent implements OnInit {
 
   task: Task = new Task();
-  date = new FormControl(new Date());
+  date = new FormControl(new Date()); // that makes that i get todays date automatically
   loading: boolean = false;
 
   constructor( 
@@ -23,6 +23,10 @@ export class DialogueAddTaskComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  /**
+   * this function transfer new data to firebase
+   */
   saveTask() {
     this.task.date = this.date.value.getTime();
     this.loading = true;
@@ -39,6 +43,9 @@ export class DialogueAddTaskComponent implements OnInit {
     console.log('Current Task is: ', this.task);
   }
 
+  /**
+   * this function close the dialog
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
