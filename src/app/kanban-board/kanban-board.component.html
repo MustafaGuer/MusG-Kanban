@@ -4,22 +4,26 @@
   
       <div
         cdkDropList
+        #todoList="cdkDropList"
         [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[inProgressList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.title}}</div>
       </div>
     </div>
-  
+    
     <div class="example-container">
       <h2>In Progress</h2>
   
       <div
         cdkDropList
+        #inProgressList="cdkDropList"
         [cdkDropListData]="inprogress"
+        [cdkDropListConnectedTo]="[testingList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of inprogress" cdkDrag><h2>{{item.title}}</h2><p>{{item.description}}</p></div>
+        <div class="example-box" *ngFor="let item of inprogress" cdkDrag>{{ item.title }}</div>
       </div>
     </div>
 
@@ -28,10 +32,13 @@
     
         <div
           cdkDropList
+          #testingList="cdkDropList"
           [cdkDropListData]="testing"
+          [cdkDropListConnectedTo]="[doneList]"
           class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of testing" cdkDrag><h2>{{item.title}}</h2><p>{{item.description}}</p></div>
+          (cdkDropListDropped)="drop($event)"> 
+          <!-- {{ console.log('doneList', doneList) }} -->
+          <div class="example-box" *ngFor="let item of testing" cdkDrag>{{ item.title }}</div>
         </div>
       </div>
 
@@ -40,12 +47,15 @@
     
         <div
           cdkDropList
+          #doneList="cdkDropList"
           [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="[todoList]"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+          <div class="example-box" *ngFor="let item of done" cdkDrag>{{ item.title }}</div>
         </div>
       </div>
+      
   </div>
 
 

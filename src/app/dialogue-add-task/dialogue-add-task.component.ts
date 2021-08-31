@@ -30,6 +30,7 @@ export class DialogueAddTaskComponent implements OnInit {
   saveTask() {
     this.task.date = this.date.value.getTime();
     this.loading = true;
+    // this.task.currentStatus = 'todo';
 
     this
     .firestore
@@ -40,7 +41,7 @@ export class DialogueAddTaskComponent implements OnInit {
       this.dialogRef.close();
     })
 
-    console.log('Current Task is: ', this.task);
+    // console.log('Current Task is: ', this.task);
   }
 
   /**

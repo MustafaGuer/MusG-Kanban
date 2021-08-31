@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogueAddTaskComponent } from '../dialogue-add-task/dialogue-add-task.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Task } from 'src/models/task.class';
 
 @Component({
   selector: 'app-kanban-board',
@@ -10,7 +11,15 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./kanban-board.component.scss']
 })
 export class KanbanBoardComponent implements OnInit {
+  task: Task = new Task();
+  console = console;
+  currentTask: any;
+
   tasks: any = [];
+  todo: any = [];
+  inprogress: any = [];
+  testing: any = [];
+  done: any = [];
 
   constructor(
     private firestore: AngularFirestore,
@@ -18,55 +27,70 @@ export class KanbanBoardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.
-      firestore
+    this
+      .firestore
       .collection('tasks')
-      .valueChanges()
+      .valueChanges({ idField: 'taskId' })
       .subscribe((task: any) => {
-        console.log('Task is: ', task);
         this.tasks = task;
-        console.log('This Tasks are: ', this.tasks);
+
+        this.pushToArrays();
       });
   }
 
-  todo: any = [
-    'Get to work',
-    'Pick up groceries',
-    'Get up',
-    'Brush teeth',
-    'Check e-mail',
-    'Take a shower',
-    'Walk dog',
-    'Go home',
-    'Fall asleep'
-  ];
-
-  inprogress: any = [
-    {
-      'title': 'Test',
-      'urgency': 'high',
-      'description': 'This is a test message.'
-    },
-    {
-      'title': 'Test 2',
-      'urgency': 'medium',
-      'description': 'This is a second test message.'
-    }
-  ];
-
-  testing: any  = [];
-
-  done: any  = [];
+  pushToArrays() {
+    this.todo = [];
+    this.inprogress = [];
+    this.testing = [];
+    this.done = [];
+    this.tasks.forEach((task: any) => {
+      if (task.currentStatus === 'todo') {
+        this.todo.push(task);
+      } else if (task.currentStatus === 'inprogress') {
+        this.inprogress.push(task);
+      } else if (task.currentStatus === 'testing') {
+        this.testing.push(task);
+      } else if (task.currentStatus === 'done') {
+        this.done.push(task);
+      }
+    });
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    };
+
+    if (event.container.id == 'cdk-drop-list-0') {
+      this.todo[event.currentIndex].currentStatus = 'todo';
+    } else if (event.container.id == 'cdk-drop-list-1') {
+      this.inprogress[event.currentIndex].currentStatus = 'inprogress';
+    } else if (event.container.id === 'cdk-drop-list-2') {
+      this.testing[event.currentIndex].currentStatus = 'testing';
+    } else {
+      this.done[event.currentIndex].currentStatus = 'done';
     }
+    this.currentTask = event.container.data[event.currentIndex];
+    this.updateTasks();
+  }
+
+  updateTasks() {
+
+    this
+      .firestore
+      .collection('tasks')
+      .doc(this.currentTask.taskId)
+      .update({
+        'currentStatus': this.currentTask.currentStatus
+      })
+      .then(() => {
+        console.log('UPDATE SUCCESSFULL');
+      });
   }
 
 
