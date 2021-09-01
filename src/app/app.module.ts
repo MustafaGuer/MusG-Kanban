@@ -26,7 +26,6 @@ import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.component';
 

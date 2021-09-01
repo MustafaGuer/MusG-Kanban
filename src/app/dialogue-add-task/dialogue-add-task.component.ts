@@ -24,13 +24,10 @@ export class DialogueAddTaskComponent implements OnInit {
   }
 
 
-  /**
-   * this function transfer new data to firebase
-   */
+
   saveTask() {
     this.task.date = this.date.value.getTime();
     this.loading = true;
-    // this.task.currentStatus = 'todo';
 
     this
     .firestore
@@ -40,13 +37,9 @@ export class DialogueAddTaskComponent implements OnInit {
       this.loading = false;
       this.dialogRef.close();
     })
-
-    // console.log('Current Task is: ', this.task);
   }
 
-  /**
-   * this function close the dialog
-   */
+
   onNoClick(): void {
     this.dialogRef.close();
   }
