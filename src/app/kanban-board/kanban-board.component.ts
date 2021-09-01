@@ -49,7 +49,7 @@ export class KanbanBoardComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
       this.currentTask = event.container.data[event.currentIndex];
-      this.saveTasks();
+      // this.saveTasks();
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
@@ -73,7 +73,7 @@ export class KanbanBoardComponent implements OnInit {
       this.done[event.currentIndex].currentStatus = 'done';
     }
 
-    this.saveTasks();
+    // this.saveTasks();
   }
 
   saveTasks() {
