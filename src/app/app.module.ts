@@ -28,13 +28,15 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.component';
+import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     KanbanBoardComponent,
-    DialogueAddTaskComponent
+    DialogueAddTaskComponent,
+    DialogTaskDetailComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

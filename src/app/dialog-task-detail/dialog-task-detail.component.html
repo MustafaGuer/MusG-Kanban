@@ -1,0 +1,46 @@
+<div class="dialog-container">
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+    <h1 mat-dialog-title>Add Task</h1>
+    <div mat-dialog-content>
+
+        <div>
+            <mat-form-field appearance="outline" class="mr-16">
+                <mat-label>Title...</mat-label>
+                <input [disabled]="loading" [(ngModel)]="task.title" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Urgency</mat-label>
+                <mat-select [disabled]="loading" [(ngModel)]="task.urgency">
+                    <mat-option class="high" value="high">High</mat-option>
+                    <mat-option class="medium" value="medium">Medium</mat-option>
+                    <mat-option class="low" value="low">Low</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Textarea</mat-label>
+                <textarea [disabled]="loading" [(ngModel)]="task.description" matInput rows="5"></textarea>
+            </mat-form-field>
+        </div>
+
+
+    </div>
+
+    <div mat-dialog-actions class="space-between">
+        <button [disabled]="loading" matTooltip="Click to Cancel" mat-button (click)="onNoClick()"><mat-icon aria-hidden="false" aria-label="cancel icon">close</mat-icon></button>
+        <button [disabled]="loading" matTooltip="Click to delete" mat-button (click)="deleteTask()"
+            [mat-dialog-close]="">
+            <mat-icon aria-hidden="false" aria-label="delete icon">delete_forever</mat-icon>
+        </button>
+        <button [disabled]="loading" matTooltip="Click to Save" mat-button (click)="saveTask()" [mat-dialog-close]=""
+            cdkFocusInitial>
+            <mat-icon aria-hidden="false" aria-label="save icon">save_alt</mat-icon>
+        </button>
+    </div>
+
+</div>

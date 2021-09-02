@@ -4,7 +4,7 @@
 }
 
 .add-btn {
-    position: absolute;
+    position: fixed;
     right: 64px;
     bottom: 64px;
 }
@@ -38,7 +38,7 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    cursor: move;
+    cursor: pointer;
     background: white;
     font-size: 14px;
 

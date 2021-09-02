@@ -4,6 +4,7 @@ import { DialogueAddTaskComponent } from '../dialogue-add-task/dialogue-add-task
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from 'src/models/task.class';
+import { DialogTaskDetailComponent } from '../dialog-task-detail/dialog-task-detail.component';
 
 @Component({
   selector: 'app-kanban-board',
@@ -14,7 +15,9 @@ export class KanbanBoardComponent implements OnInit {
   task: Task = new Task();
 
   console = console;
-  currentTask: any;
+  droppedTask: any;
+
+  tasks: any = [];
 
   todo: any = [];
   inProgress: any = [];
@@ -33,33 +36,50 @@ export class KanbanBoardComponent implements OnInit {
       .valueChanges({ idField: 'taskId' })
       .subscribe((task: any) => {
 
-        console.log(task);
+        console.log('TASK: ', task);
+        // this.todo = [];
+        // this.inProgress = [];
+        // this.testing = [];
+        // this.done = [];
+        // task.forEach((t: any) => {
+        //   if(t['currentStatus'] == 'todo') {
+        //     this.todo.push(new Task(t));
+        //   } else if(t['currentStatus'] == 'inProgress') {
+        //     this.inProgress.push(new Task(t));
+        //   } else if(t['currentStatus'] == 'testing') {
+        //     this.testing.push(new Task(t));
+        //   } else if(t['currentStatus'] == 'done') {
+        //     this.done.push(new Task(t));
+        //   }
+        // });
 
         this.todo = task.filter((t: any) => t['currentStatus'] == 'todo');
         this.inProgress = task.filter((t: any) => t['currentStatus'] == 'inProgress');
         this.testing = task.filter((t: any) => t['currentStatus'] == 'testing');
         this.done = task.filter((t: any) => t['currentStatus'] == 'done');
+        
+        this.logArrays('at init');
       });
-
+    
   }
-
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 
-      this.currentTask = event.container.data[event.currentIndex];
-      // this.saveTasks();
+      this.droppedTask = event.container.data[event.currentIndex];
+      this.saveTasks();
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
 
-      this.currentTask = event.container.data[event.currentIndex];
+      this.droppedTask = event.container.data[event.currentIndex];
       this.updateTasksStatus(event);
     };
     console.log('EVENT: ', event);
+    this.logArrays('after drop');
   }
 
   updateTasksStatus(event: CdkDragDrop<string[]>) {
@@ -73,7 +93,7 @@ export class KanbanBoardComponent implements OnInit {
       this.done[event.currentIndex].currentStatus = 'done';
     }
 
-    // this.saveTasks();
+    this.saveTasks();
   }
 
   saveTasks() {
@@ -81,9 +101,9 @@ export class KanbanBoardComponent implements OnInit {
     this
       .firestore
       .collection('tasks')
-      .doc(this.currentTask.taskId)
+      .doc(this.droppedTask.taskId)
       .update({
-        currentStatus: this.currentTask.currentStatus
+        currentStatus: this.droppedTask.currentStatus
       })
       .then(() => {
         console.log('SAVE SUCCESSFULL');
@@ -94,4 +114,21 @@ export class KanbanBoardComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogueAddTaskComponent);
   }
 
+  openDialogTaskDetail(task: any) {
+    const dialog = this.dialog.open(DialogTaskDetailComponent);
+    dialog.componentInstance.task = new Task(task);
+    dialog.componentInstance.taskId = task.taskId;
+    console.log('detail task: ', task);
+    console.log('detail taskId: ', task.taskId)
+  }
+
+
+
+
+  logArrays(c: string) {
+    console.log('todo ' + c, this.todo);
+    console.log('inProgress ' + c, this.inProgress);
+    console.log('testing ' + c, this.testing);
+    console.log('done ' + c, this.done);
+  }
 }

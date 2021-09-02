@@ -4,7 +4,7 @@
     
     <div cdkDropList [cdkDropListData]="todo" class="list" (cdkDropListDropped)="drop($event)">
       <!-- {{ console.log('todoList', todoList) }} -->
-      <div class="box" *ngFor="let task of todo" cdkDrag>
+      <div class="box" *ngFor="let task of todo" (click)="openDialogTaskDetail(task)" cdkDrag>
         <div>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
@@ -22,7 +22,7 @@
     
     <div cdkDropList [cdkDropListData]="inProgress" class="list" (cdkDropListDropped)="drop($event)">
       <!-- {{ console.log('inProgressList', inProgressList) }} -->
-      <div class="box" *ngFor="let task of inProgress" cdkDrag>
+      <div class="box" *ngFor="let task of inProgress" (click)="openDialogTaskDetail(task)" cdkDrag>
         <div>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
@@ -40,7 +40,7 @@
     
     <div cdkDropList [cdkDropListData]="testing" class="list" (cdkDropListDropped)="drop($event)">
       <!-- {{ console.log('testingList', testingList) }} -->
-      <div class="box" *ngFor="let task of testing" cdkDrag>
+      <div class="box" *ngFor="let task of testing" (click)="openDialogTaskDetail(task)" cdkDrag>
         <div>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
@@ -58,7 +58,7 @@
     
     <div cdkDropList [cdkDropListData]="done" class="list" (cdkDropListDropped)="drop($event)">
       <!-- {{ console.log('doneList', doneList) }} -->
-      <div class="box" *ngFor="let task of done" cdkDrag>
+      <div class="box" *ngFor="let task of done" (click)="openDialogTaskDetail(task)" cdkDrag>
         <div>
           <h3>{{ task.title }}</h3>
           <p>{{ task.description }}</p>
