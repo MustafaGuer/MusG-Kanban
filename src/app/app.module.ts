@@ -22,13 +22,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.component';
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
+import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-deta
     AppComponent,
     KanbanBoardComponent,
     DialogueAddTaskComponent,
-    DialogTaskDetailComponent
+    DialogTaskDetailComponent,
+    DialogSignupComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -58,6 +60,7 @@ import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-deta
     MatNativeDateModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressBarModule,
     DragDropModule
   ],

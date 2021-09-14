@@ -9,6 +9,9 @@
             <li>
                 <mat-icon>dashboard</mat-icon>Kanban
             </li>
+            <li (click)="openSignUp()"> 
+                <mat-icon>person_add_alt</mat-icon>Sign Up
+            </li>
         </ul>
     </mat-drawer>
 
@@ -17,6 +20,7 @@
             <mat-icon aria-hidden="false">menu</mat-icon>
         </button>
         <span>MusG's-Kanban</span>
+        <span (click)="openSignUp()"><mat-icon>person_add_alt</mat-icon>Sign Up</span>
     </mat-toolbar>
 
     <div class="router-container">
