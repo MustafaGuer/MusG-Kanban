@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { AuthenticationService } from "../services/authentication.service";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-dialog-signup',
@@ -15,12 +16,14 @@ export class DialogSignupComponent implements OnInit {
   loading = false;
   user: User = new User();
 
-  constructor(public dialogRef: MatDialogRef<DialogSignupComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogSignupComponent>,
+    public authenticationService: AuthenticationService,
+    public auth: AngularFireAuth,
+    ) { }
 
   ngOnInit(): void {
   }
-
-
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
@@ -32,25 +35,8 @@ export class DialogSignupComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  saveUser() {
-
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
-
   
 }
-
-// const auth = getAuth();
-//   createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-//     // Signed in 
-//     const user = userCredential.user;
-//     // ...
-//   }).catch ((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ..
-//   });
-

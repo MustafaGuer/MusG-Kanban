@@ -9,7 +9,8 @@
 <div class="example-container">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Enter your email</mat-label>
-        <input [(ngModel)]="user.email" matInput placeholder="pat@example.com" [formControl]="email" required>
+        <input [(ngModel)]="user.email" matInput placeholder="pat@example.com" [formControl]="email" required
+            #emailSignUp>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 </div>
@@ -17,7 +18,7 @@
 <div class="example-container">
     <mat-form-field appearance="outline">
         <mat-label>Enter your password</mat-label>
-        <input [(ngModel)]="user.password" name="password" matInput [type]="hide ? 'password' : 'text'">
+        <input [(ngModel)]="user.password" name="password" matInput [type]="hide ? 'password' : 'text'" #passwordSignUp>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -27,5 +28,7 @@
 
 <div mat-dialog-actions class="space-between">
     <button [disabled]="loading" matTooltip="Click to Cancel" mat-button (click)="onNoClick()">Cancel</button>
-    <button [disabled]="loading" matTooltip="Click to Save" mat-button (click)="saveUser()" [mat-dialog-close]="" cdkFocusInitial>Sign Up</button>
+    <button [disabled]="loading" matTooltip="Click to Save" mat-button
+        (click)="authenticationService.signUpUser(emailSignUp.value, passwordSignUp.value)" [mat-dialog-close]="" cdkFocusInitial>Sign
+        Up</button>
 </div>

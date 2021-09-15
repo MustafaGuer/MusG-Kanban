@@ -36,7 +36,7 @@ export class KanbanBoardComponent implements OnInit {
       .valueChanges({ idField: 'taskId' })
       .subscribe((task: any) => {
 
-        console.log('TASK: ', task);
+        // console.log('TASK: ', task);
         // this.todo = [];
         // this.inProgress = [];
         // this.testing = [];
@@ -58,7 +58,7 @@ export class KanbanBoardComponent implements OnInit {
         this.testing = task.filter((t: any) => t['currentStatus'] == 'testing');
         this.done = task.filter((t: any) => t['currentStatus'] == 'done');
         
-        this.logArrays('at init');
+        // this.logArrays('at init');
       });
     
   }
@@ -78,8 +78,8 @@ export class KanbanBoardComponent implements OnInit {
       this.droppedTask = event.container.data[event.currentIndex];
       this.updateTasksStatus(event);
     };
-    console.log('EVENT: ', event);
-    this.logArrays('after drop');
+    // console.log('EVENT: ', event);
+    // this.logArrays('after drop');
   }
 
   updateTasksStatus(event: CdkDragDrop<string[]>) {
@@ -106,7 +106,7 @@ export class KanbanBoardComponent implements OnInit {
         currentStatus: this.droppedTask.currentStatus
       })
       .then(() => {
-        console.log('SAVE SUCCESSFULL');
+        // console.log('SAVE SUCCESSFULL');
       });
   }
 
@@ -118,8 +118,8 @@ export class KanbanBoardComponent implements OnInit {
     const dialog = this.dialog.open(DialogTaskDetailComponent);
     dialog.componentInstance.task = new Task(task);
     dialog.componentInstance.taskId = task.taskId;
-    console.log('detail task: ', task);
-    console.log('detail taskId: ', task.taskId)
+    // console.log('detail task: ', task);
+    // console.log('detail taskId: ', task.taskId)
   }
 
 

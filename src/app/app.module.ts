@@ -31,6 +31,8 @@ import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
 
+// Auth service
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
     MatProgressBarModule,
     DragDropModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
