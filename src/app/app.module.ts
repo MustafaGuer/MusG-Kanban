@@ -30,9 +30,11 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.component';
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
+import { DialogSigninComponent } from './dialog-signin/dialog-signin.component';
 
 // Auth service
 import { AuthenticationService } from './services/authentication.service';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,10 @@ import { AuthenticationService } from './services/authentication.service';
     KanbanBoardComponent,
     DialogueAddTaskComponent,
     DialogTaskDetailComponent,
-    DialogSignupComponent
+    DialogSignupComponent,
+    ToolbarComponent,
+    DialogSigninComponent,
+    
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

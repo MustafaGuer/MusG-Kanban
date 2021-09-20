@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
-import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-root',
@@ -10,13 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class AppComponent {
   title = 'MusG-Kanban';
 
-  constructor(public dialog: MatDialog) {
+  constructor() {
 
   }
 
-
-
-  openSignUp(): void {
-    const dialogRef = this.dialog.open(DialogSignupComponent);
-  }
 }
