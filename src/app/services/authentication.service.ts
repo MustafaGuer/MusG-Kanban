@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import * as firebase from 'firebase/compat';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthenticationService {
 
   constructor(
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth, 
+    public firebase: FirebaseApp
   ) { }
 
   signUpUser(email: string, password: string) {
@@ -31,6 +34,16 @@ export class AuthenticationService {
     .then(res => {
       const user = res.user;
       console.log('res signin: ', res);
+
+      this.firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User logged in already or has just logged in.
+          console.log(user.uid);
+        } else {
+          // User not logged in or has just logged out.
+        }
+      });
+
     })
     .catch(error => {
       const errorCode = error.code;

@@ -31,10 +31,10 @@ import { DialogueAddTaskComponent } from './dialogue-add-task/dialogue-add-task.
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 import { DialogSignupComponent } from './dialog-signup/dialog-signup.component';
 import { DialogSigninComponent } from './dialog-signin/dialog-signin.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 // Auth service
 import { AuthenticationService } from './services/authentication.service';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
